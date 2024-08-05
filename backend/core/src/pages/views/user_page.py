@@ -5,11 +5,12 @@ from src.memos.models import UploadedMemo
 
 
 class UserPageTemplateView(LoginRequiredMixin, TemplateView):
-    template_name = "user_page.html"
+    template_name = "user_page/user_page.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["memos"] = UploadedMemo.objects.filter(
             user=self.request.user,
         )
+        print(context["memos"])
         return context

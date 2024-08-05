@@ -220,7 +220,8 @@
 
     <script>
       function getCSRFToken() {
-        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+          const match = document.cookie.match(new RegExp('(^| )' + 'csrftoken' + '=([^;]+)'));
+          if (match) return match[2];
       }
 
       async function submitForm() {
@@ -271,6 +272,5 @@
           alert("There was an error processing your request.");
         }
       }
-
     </script>
 {% endblock %}

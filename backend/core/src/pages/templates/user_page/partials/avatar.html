@@ -1,0 +1,60 @@
+<style>
+    .avatar-container {
+        position: relative;
+        margin-bottom: 10px;
+        margin-top: 50px;
+    }
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid #1e90ff;
+        box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+    }
+
+    .file-input {
+        display: none;
+    }
+
+    .file-input-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        background-color: #1e90ff;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .file-input-button svg {
+        width: 18px;
+        height: 18px;
+        fill: #ffffff;
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data" action="{% url 'upload_avatar' %}">
+    {% csrf_token %}
+    <div class="avatar-container">
+        {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="User Avatar" class="avatar" id="avatar">
+        {% else %}
+            <img src="https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png" alt="User Avatar" class="avatar" id="avatar">
+        {% endif %}
+        <label for="file-input" class="file-input-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                <path fill="currentColor"
+                      d="M21.65 3.434a4.889 4.889 0 1 1 6.915 6.914l-.902.901l-6.914-6.914zM19.335 5.75L4.357 20.73a3.7 3.7 0 0 0-1.002 1.84l-1.333 6.22a1 1 0 0 0 1.188 1.188l6.22-1.333a3.7 3.7 0 0 0 1.84-1.002l14.98-14.98z"></path>
+            </svg>
+        </label>
+        <input type="file" name="avatar" class="file-input" id="file-input" accept="image/*"
+               onchange="this.form.submit();">
+    </div>
+</form>
