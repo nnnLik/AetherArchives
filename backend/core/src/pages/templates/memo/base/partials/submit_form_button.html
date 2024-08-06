@@ -1,0 +1,24 @@
+{% block additional_css %}
+    <style>
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #1e90ff;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #1c86ee;
+            transform: scale(1.05);
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <button class="submit-button" type="button" onclick="submitForm()">Create</button>
+{% endblock %}

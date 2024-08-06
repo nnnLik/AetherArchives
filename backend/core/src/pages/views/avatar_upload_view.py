@@ -18,13 +18,18 @@ class AvatarUploadForm(forms.ModelForm):
 
 class AvatarUploadView(LoginRequiredMixin, FormView):
     form_class = AvatarUploadForm
-    template_name = "user_page.html"
+    template_name = "user_page/user_page.html"
     success_url = reverse_lazy("user_page")
 
     def form_valid(self, form: AvatarUploadForm) -> HttpResponseRedirect:
         user = self.request.user
         user.avatar = form.cleaned_data["avatar"]
         user.save()
+
+        referer = self.request.META.get("HTTP_REFERER")
+        if referer:
+            return HttpResponseRedirect(referer)
+
         return super().form_valid(form)
 
     def get_form_kwargs(self) -> dict[str, Any]:

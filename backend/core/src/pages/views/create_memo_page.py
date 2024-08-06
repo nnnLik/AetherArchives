@@ -11,7 +11,7 @@ from src.memos.models import UploadedMemo
 
 
 class CreateMemoTemplateView(LoginRequiredMixin, TemplateView):
-    template_name = "create_memo_page.html"
+    template_name = "memo/create_memo_page.html"
 
     def post(
         self,

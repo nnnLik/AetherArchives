@@ -1,0 +1,57 @@
+{% extends "memo/base/memo_base_page.html" %}
+
+{% block title %}Edit Memo{% endblock %}
+
+{% block additional_js %}
+    <script>
+      function getCSRFToken() {
+        const match = document.cookie.match(new RegExp('(^| )' + 'csrftoken' + '=([^;]+)'));
+        if (match) return match[2];
+      }
+
+      async function submitForm() {
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const body = document.getElementById('body').value;
+
+        if (title.length > 100) {
+          alert("Title cannot exceed 100 characters.");
+          return;
+        }
+
+        if (description.length > 250) {
+          alert("Description cannot exceed 250 characters.");
+          return;
+        }
+
+        if (!title || !body) {
+          alert("Title and body are required.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('body', body);
+
+        try {
+          const response = await fetch("{% url 'update_memo_page' memo.id %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-CSRFToken': getCSRFToken()
+            }
+          });
+
+          if (response.ok) {
+            window.location.href = "{% url 'user_page' %}";
+          } else {
+            alert("There was an error processing your request.");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("There was an error processing your request.");
+        }
+      }
+    </script>
+{% endblock %}

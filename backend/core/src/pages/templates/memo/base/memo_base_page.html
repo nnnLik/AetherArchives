@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block additional_css %}
+{% endblock %}
+
+{% block additional_js %}
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 90px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="back-button">
+            {% include 'memo/base/partials/back_button.html' %}
+        </div>
+        <div class="main-form">
+            {% include 'memo/base/partials/main_memo_form.html' %}
+        </div>
+    </div>
+{% endblock %}

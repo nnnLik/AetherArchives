@@ -1,0 +1,124 @@
+{% block additional_css %}
+    <style>
+        .form__group {
+            position: relative;
+            padding: 15px 0 0;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form__field {
+            font-family: inherit;
+            width: 100%;
+            border: 0;
+            border-bottom: 2px solid #9b9b9b;
+            outline: 0;
+            font-size: 1.3rem;
+            color: #fff;
+            padding: 7px 0;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+
+        .form__field::placeholder {
+            color: transparent;
+        }
+
+        .form__field:placeholder-shown ~ .form__label {
+            font-size: 1.3rem;
+            cursor: text;
+            top: 20px;
+        }
+
+        .form__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: 0.2s;
+            font-size: 1rem;
+            color: #9b9b9b;
+        }
+
+        .form__field:focus {
+            padding-bottom: 6px;
+            font-weight: 700;
+            border-width: 3px;
+        }
+
+        .form__field:focus ~ .form__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: 0.2s;
+            font-size: 1rem;
+            color: #11998e;
+            font-weight: 700;
+        }
+
+        .form__field:required, .form__field:invalid {
+            box-shadow: none;
+        }
+
+        .char-count {
+            font-size: 0.9rem;
+            color: #9b9b9b;
+            margin-top: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="form__group">
+        <input type="text" class="form__field" placeholder="Title" id="title" name="title" required
+               maxlength="100"/>
+        <label for="title" class="form__label">Title</label>
+        <span id="titleCount" class="char-count">0/100</span>
+    </div>
+
+    <div class="form__group">
+        <input type="text" class="form__field" placeholder="Description" id="description" name="description"
+               required maxlength="250"/>
+        <label for="description" class="form__label">Description</label>
+        <span id="descriptionCount" class="char-count">0/250</span>
+    </div>
+
+    <div class="form__group">
+        <textarea class="form__field" placeholder="Body" id="body" name="body" rows="6" required></textarea>
+        <label for="body" class="form__label">Body</label>
+        <span id="bodyCount" class="char-count">0/∞</span>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script>
+      document.getElementById('title').addEventListener('input', function () {
+        const maxLength = this.maxLength;
+        const currentLength = this.value.length;
+        document.getElementById('titleCount').textContent = `${currentLength}/${maxLength}`;
+      });
+
+      document.getElementById('description').addEventListener('input', function () {
+        const maxLength = this.maxLength;
+        const currentLength = this.value.length;
+        document.getElementById('descriptionCount').textContent = `${currentLength}/${maxLength}`;
+      });
+
+      document.getElementById('body').addEventListener('input', function () {
+        const currentLength = this.value.length;
+        document.getElementById('bodyCount').textContent = `${currentLength}/∞`;
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const title = document.getElementById('title');
+        const description = document.getElementById('description');
+        const body = document.getElementById('body');
+
+        document.getElementById('titleCount').textContent = `${title.value.length}/100`;
+        document.getElementById('descriptionCount').textContent = `${description.value.length}/250`;
+        document.getElementById('bodyCount').textContent = `${body.value.length}/∞`;
+      });
+    </script>
+{% endblock %}
