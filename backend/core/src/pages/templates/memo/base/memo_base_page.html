@@ -3,9 +3,6 @@
 {% block title %}{% endblock %}
 
 {% block additional_css %}
-{% endblock %}
-
-{% block additional_js %}
     <style>
         body, html {
             height: 100%;
@@ -26,9 +23,14 @@
     </style>
 {% endblock %}
 
+{% block additional_js %}
+    {{ block.super }}
+{% endblock %}
+
+
 {% block content %}
     <div class="container">
-        <div class="back-button">
+        <div class="base-back-button">
             {% include 'memo/base/partials/back_button.html' %}
         </div>
         <div class="main-form">

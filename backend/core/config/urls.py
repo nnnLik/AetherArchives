@@ -9,7 +9,8 @@ from .yasg import schema_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(routes)),
-    path("auth/", include("django.contrib.auth.urls")),
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
     path(
         "swagger/",
         schema_view.with_ui("swagger"),
