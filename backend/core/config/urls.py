@@ -15,7 +15,6 @@ urlpatterns = [
         schema_view.with_ui("swagger"),
         name="schema-swagger-ui",
     ),
-    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if settings.DEBUG:

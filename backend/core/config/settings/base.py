@@ -5,7 +5,7 @@ from pathlib import Path
 from .constants import application_consts
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DEBUG = application_consts.server.DEBUG
+DEBUG = False
 TESTING = "test" in sys.argv
 
 INSTALLED_APPS = [
@@ -79,9 +79,3 @@ AUTH_USER_MODEL = "core.AetherUser"
 LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/auth/login"
-
-if DEBUG and not TESTING:
-    MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
-    INSTALLED_APPS += ("debug_toolbar",)
-
-    DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda _request: DEBUG}

@@ -35,5 +35,4 @@ class AvatarUploadView(LoginRequiredMixin, FormView):
     def get_form_kwargs(self) -> dict[str, Any]:
         kwargs = super().get_form_kwargs()
         kwargs["instance"] = self.request.user
-        print("ASAs")
         return kwargs
