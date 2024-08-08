@@ -22,3 +22,7 @@
 {% block content %}
     <button class="submit-button" type="button" onclick="submitForm()">Create</button>
 {% endblock %}
+
+{% block additional_js %} 
+    {{ block.super }}
+{% endblock %}
