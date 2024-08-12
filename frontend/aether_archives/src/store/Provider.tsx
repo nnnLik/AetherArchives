@@ -31,7 +31,7 @@ export function Provider(props: { children: JSX.Element }): JSX.Element {
   const agent = createAgent(store);
 
   auth = createAuth(agent, actions, setState as SetStoreFunction<State>);
-  user = createUser(agent, actions, state, setState as SetStoreFunction<State>);  
+  user = createUser(agent, actions, state, setState as SetStoreFunction<State>);
 
   return (
     <StoreContext.Provider value={store}>
@@ -40,6 +40,6 @@ export function Provider(props: { children: JSX.Element }): JSX.Element {
   );
 }
 
-export function useStore(): [State, Actions] {
+export function useStore(): [State, Actions] | undefined {
   return useContext(StoreContext);
 }

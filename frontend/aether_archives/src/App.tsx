@@ -1,29 +1,34 @@
 import type { Component } from 'solid-js';
+import { createEffect } from "solid-js";
+import { Route, Router, useNavigate } from '@solidjs/router';
 import { useStore } from './store/Provider';
+import LoginPage from "./pages/LoginPage/LoginPage";
+import UserPage from "./pages/UserPage/UserPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 const App: Component = () => {
-  const [state, actions] = useStore();
+    const [state, _] = useStore();
+    const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    try {
-      await actions.login('a@a.com', 'admin');
-    } catch (err) {
-      console.error('Login failed:', err);
-    }
-  };
+    createEffect(() => {
+        if (state.token) {
+            if (window.location.pathname === '/login' || window.location.pathname === '/register') {
+                navigate('/');
+            }
+        } else {
+            if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+                navigate('/login');
+            }
+        }
+    });
 
-  return (
-    <div>
-      <h1>JWT Authentication with SolidJS</h1>
-      {state.user ? (
-        <div>
-          <p>Welcome, {state.user.username}</p>
-        </div>
-      ) : (
-        <button onClick={handleLogin}>Login</button>
-      )}
-    </div>
-  );
+    return (
+        <Router>
+            <Route path="/" component={UserPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
+        </Router>
+    );
 };
 
 export default App;

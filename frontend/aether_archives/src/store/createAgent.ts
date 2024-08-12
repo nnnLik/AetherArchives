@@ -1,13 +1,19 @@
-interface LoginResponse {
+type LoginResponseDTO = {
     access: string;
-    refresh: string
+    refresh: string;
+}
+
+type UserResponseDTO = {
+    id: string;
+    username: string;
+    email: string;
 }
 
 export default function createAgent(store) {
     const [state] = store;
 
     const Auth = {
-        login: async (email: string, password: string): Promise<LoginResponse> => {
+        login: async (email: string, password: string): Promise<LoginResponseDTO> => {
             const response = await fetch('http://localhost:6969/api/auth/jwt/create/', {
                 method: 'POST',
                 headers: {
@@ -17,8 +23,8 @@ export default function createAgent(store) {
             });
             return await response.json();
         },
-        current: async () => {
-            const response = await fetch('http://localhost:6969/me', {
+        current: async (): Promise<UserResponseDTO> => {
+            const response = await fetch('http://localhost:6969/api/auth/users/me/', {
                 headers: {
                     'Authorization': `Bearer ${state.token}`,
                 },
