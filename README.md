@@ -1,0 +1,21 @@
+# TODO:
+- [ ] add interceptor and handle 401 error code
+- [ ] complete solidjs application setup
+- [ ] remove django templates
+- [ ] add markdown syntax to memo
+- [ ] add limitation to default user. Create tariffs
+- [ ] possible to load images, audio, video, gifs and other media stuff
+- [ ] k8s
+- [ ] tests api
+- [ ] hash generator service
+- [ ] share with memo link
+- [ ] ttl for shared memo
+- [ ] permissions for shared memo
+- [ ] mapping s3 url to short hash
+- [ ] load balancer
+- [ ] MASTER - SLAVE db strategy
+- [ ] cache with redis
+- [ ] a few instance of redis
+- [ ] emoji \ reaction on memo
+- [ ] permissions for memo to edit / read.
+- [ ] real time collaboration
